@@ -1,0 +1,10 @@
+docker container start
+docker container stop
+docker ps    | Lista containers ativos
+docker ps -a | Lista todos os containers
+docker ps -q | Retorna apenas os IDs
+docker stop -t 0 $(docker ps -q) Para a lista de containers rodando imediatamente o padrão e 10s
+docker rm -f ID_CONTAINER Remove o container
+docker container prune Remove os containers parados
+
+Os containers são compostos por camadas e essas podem ser aproveitadas entre imagens que compartilhem a mesma camada, isso ocorre para economizar espaço em disco
