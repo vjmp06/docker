@@ -1,0 +1,81 @@
+Docker
+Antes de existir virtualização e containers as aplicações eram mantidas em servidores dentro da organização e uma aplicação poderia depender de diversos servidores, por exemplo AD, Banco de Dados, e Servidor de aplicação.
+Nesse modelo, os servidores eram cotados para segurar picos de carga, sendo que poderiam passar a maior parte do tempo sem atingir esse pico.
+Com o passar dos anos surgiu a virtualização, possibilidade criar máquinas dentro de um servidor/computador hospedeiro, por meio do hypervisor que permite a virtualização dos recursos físicos HD, Processador e Memória.
+Isso possibilita reduzir custo com luz e rede, no entanto máquinas virtuais precisam de um sistema operacional o quais necessitam de uma quantidade mínima de processamento, memória e disco, além do custo de configuração e manutenção para manter os sistemas atualizados.
+Após mais alguns anos surgiram os containers eles consomem menos espaço e recursos que as máquinas virtuais, pois não necessitam de um sistema operacional para rodar as aplicações, o sistema base é utilizado.
+ O Docker surgiu de uma empresa de PaaS (Plataforma como Serviço) que inicialmente era chamada de dotCloud.
+Foi criado com o objetivo de reduzir custos rodando mais de uma aplicação em uma mesma máquina virtual da AWS.
+O Docker é um conjunto de tecnologias para facilitar o deploy e execução de aplicações. O Docker Engine é a plataforma que mantem os containers e faz o meio de campo na comunicação com o sistema operacional
+O Docker compose é um facilitador para definir e orquestrar múltiplos containers.
+O Docker swarm é uma ferramenta para gerenciar múltiplos Dockers Engines dentro de um Cluster.
+O Docker Hub é um repositório com milhares de imagens disponíveis para download.
+O Docker Machine é uma ferramenta que permite gerenciar o Docker em um host virtual
+Para instalar o Docker no Windows é necessário que o suporte a virtualização esteja habilitado, é possível instalar o Docker por meio da Central de Software dentro do Itau.
+Pode ser necessário abrir um chamado para instalação/ atualização do wsl 1 para o wsl 2.
+Para verificar se o Docker está instalado é possível utilizar o comando 
+docker version
+
+Para executar/ baixar uma imagem se ela não estiver no repositório local
+docker run
+As imagens do docker são divididas em camadas, deste modo caso 2 ou mais imagens utilizem uma mesma camada está só será baixada uma vez, otimizando o espaço em disco.
+
+Lista imagens em execução
+docker ps
+Listar todas as imagens
+docker ps -a
+Para executar um container linkando o shell do container ao atual
+docker run -it imagem
+Para executar um container sem atrelar ao terminal atual
+docker run -d imagem
+É possível parar e executar um container pelo ID e nome
+docker stop id_container
+docker start id_container
+
+Atrelar a execução do container ao terminal atual
+docker start id_container -a -i
+Containers podem assumir dois estados
+running
+stopped
+
+Para remover um container é possível utilizar o comando
+docker rm id_container
+
+Para limpar todos os containers parados é possível utilizar o comando 
+
+docker container prune
+
+Para lista imagens locais
+
+docker images
+
+Para remover uma imagem
+
+docker rmi nome_imagem
+
+As camadas de uma imagem são somente leitura, quando criamos um container docker por meio de um docker file, é adicionada uma nova camada em cima das existentes.
+Para atribuir uma porta aleatória a um container
+docker run -d -P imagem
+Nomear um container
+docker run -d -P  --name meu_container imagem
+Usando uma porta especifica
+docker run -d -p 8080:80 imagem
+Usando variáveis de ambiente 
+docker run -d -p -e SECRET_MANAGER=123
+Listando ids dos containers
+docker ps -q 
+Parando todos os containers
+docker stop -t 0 $(docker ps -q)
+Ao excluirmos um container, os dados relacionados também são perdidos, caso seja necessário manter esses dados é possível utilizar volumes
+Os volumes ficam fora do container e podem ser linkados a uma pasta dentro dele. 
+Para criar um volume sem especificar o local
+docker run -v “/var/www” imagem
+
+Inspecionar um container, a parte do volume fica em Mount
+docker inspect id_container
+Criar volume especificando o local
+docker run -v “C:\Users\racf:/var/www”
+
+
+
+atividade 3 de 4
