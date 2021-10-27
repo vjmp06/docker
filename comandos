@@ -1,0 +1,20 @@
+docker start ID_CONTAINER	Inicia o container
+docker start -a -i ID_CONTAINER	Inicia e atrela ao terminal do container
+docker stop ID_CONTAINER	Para o container
+docker ps	Lista containers ativos
+docker images	Lista imagens
+docker ps -a	Lista todos os containers
+docker ps -q	Retorna apenas os IDs
+docker stop -t 0 $(docker ps -q)	Para a lista de containers rodando imediatamente o padrão e 10s
+docker rm -f ID_CONTAINER	Remove o container
+docker rmi -f ID_IMAGE	Remove a imagem
+docker container prune	Remove os containers parados
+docker run -p 80:80 -d -e AUTHOR='Vinícius' --name aula2 dockersamples/static-site	Executa o container na 80:80,  e utiliza a imagem xpto.  
+docker run -d	Desacopla o container do terminal
+docker run -e	Adiciona variável de ambiente
+docker run –name	Nomeia o container
+docker run -P	Faz o docker escolher uma porta de forma automática
+docker run -it	Executa e atrela ao terminal do container
+docker run -v “C:\Users\Exemplo\Desktop:/var/www” ubuntu	Cria um container com volume especificado, se o mesmo não for especificado antes dos : o docker define o D
+docker run -v “$(pwd)/var/www” -w “/var/ww” node npm start	Cria um container com volume definido na pasta atual, diretório de trabalho e executa um comando
+docker inspect ID_CONTAINER	Lista as informações do container, por exemplo volume
